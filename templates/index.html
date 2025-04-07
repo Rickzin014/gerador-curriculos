@@ -2,70 +2,43 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Currículos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 40px auto;
             max-width: 600px;
-            padding: 20px;
+            padding: 0 15px;
         }
-
         input, textarea {
             width: 100%;
             margin-bottom: 15px;
             padding: 10px;
-            font-size: 1em;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            box-sizing: border-box;
         }
-
         button {
-            padding: 12px 20px;
+            padding: 10px 20px;
             background-color: #2e86de;
             color: white;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
             width: 100%;
-            font-size: 1em;
         }
-
-        button:hover {
-            background-color: #1e5fab;
-        }
-
         h1 {
             text-align: center;
-            font-size: 1.8em;
         }
-
-        #mensagem {
+        .sucesso {
             display: none;
             color: green;
-            font-weight: bold;
             text-align: center;
-            margin-bottom: 15px;
-        }
-
-        @media (max-width: 600px) {
-            body {
-                margin: 20px;
-            }
-
-            h1 {
-                font-size: 1.5em;
-            }
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Gerador de Currículos</h1>
-
-    <p id="mensagem">✅ Currículo sendo gerado! Aguarde o download...</p>
-
-    <form action="/gerar" method="post" onsubmit="mostrarMensagem()">
+    <form id="formulario">
         <input type="text" name="nome" placeholder="Nome completo" required>
         <input type="email" name="email" placeholder="Email" required>
         <input type="text" name="telefone" placeholder="Telefone" required>
@@ -77,11 +50,32 @@
         <button type="submit">Gerar Currículo</button>
     </form>
 
+    <div class="sucesso" id="mensagem">✅ Currículo gerado com sucesso!</div>
+
     <script>
-        function mostrarMensagem() {
-            const mensagem = document.getElementById('mensagem');
-            mensagem.style.display = 'block';
-        }
+        const form = document.getElementById('formulario');
+        const mensagem = document.getElementById('mensagem');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            const response = await fetch('/gerar', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                mensagem.style.display = 'block';
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = "curriculo.pdf";
+                a.click();
+            } else {
+                alert('Erro ao gerar currículo.');
+            }
+        });
     </script>
 </body>
 </html>
