@@ -1,87 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Gerador de Currículo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f2f2f2;
-      padding: 40px;
-    }
-    .container {
-      background-color: #fff;
-      padding: 30px;
-      max-width: 600px;
-      margin: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 24px;
-      color: #333;
-    }
-    label {
-      font-weight: 600;
-      display: block;
-      margin-top: 16px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-top: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-      font-size: 14px;
-    }
-    button {
-      margin-top: 24px;
-      width: 100%;
-      padding: 12px;
-      background-color: #007bff;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-    small {
-      font-size: 12px;
-      color: #777;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Gerador de Currículos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px auto;
+            max-width: 600px;
+        }
+        input, textarea {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        h1 {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Gerador de Currículo</h1>
-    <form action="/gerar" method="POST">
-      <label for="nome">Nome</label>
-      <input type="text" name="nome" required>
+    <h1>Gerador de Currículos</h1>
+    <form action="/gerar" method="post">
+        <input type="text" name="nome" placeholder="Nome completo" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="telefone" placeholder="Telefone" required>
 
-      <label for="email">Email</label>
-      <input type="email" name="email" required>
+        <textarea name="habilidades" rows="4" placeholder="Habilidades (separadas por vírgula)" required></textarea>
+        <textarea name="experiencia" rows="4" placeholder="Experiências (separadas por vírgula)" required></textarea>
+        <textarea name="educacao" rows="4" placeholder="Formações acadêmicas (separadas por vírgula)" required></textarea>
 
-      <label for="telefone">Telefone</label>
-      <input type="text" name="telefone" required>
-
-      <label for="habilidades">Habilidades <small>(separadas por vírgula)</small></label>
-      <textarea name="habilidades" rows="3" required></textarea>
-
-      <label for="experiencia">Experiências Profissionais <small>(separadas por vírgula)</small></label>
-      <textarea name="experiencia" rows="3" required></textarea>
-
-      <label for="educacao">Formação Acadêmica <small>(separadas por vírgula)</small></label>
-      <textarea name="educacao" rows="3" required></textarea>
-
-      <button type="submit">Gerar Currículo PDF</button>
+        <button type="submit">Gerar Currículo</button>
     </form>
-  </div>
 </body>
 </html>
