@@ -2,35 +2,23 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerador de Currículos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Currículos</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-
-        .container {
+            margin: 20px;
+            padding: 0;
             max-width: 600px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-left: auto;
+            margin-right: auto;
         }
 
         input, textarea {
             width: 100%;
             margin-bottom: 15px;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 10px;
+            box-sizing: border-box;
             font-size: 16px;
         }
 
@@ -40,35 +28,28 @@
             background-color: #2e86de;
             color: white;
             border: none;
-            border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #1b4f72;
-        }
-
         h1 {
             text-align: center;
-            color: #333;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Gerador de Currículos</h1>
-        <form action="/gerar" method="post">
-            <input type="text" name="nome" placeholder="Nome completo" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="text" name="telefone" placeholder="Telefone" required>
+    <h1>Gerador de Currículos</h1>
+    <form action="/gerar" method="post">
+        <input type="text" name="nome" placeholder="Nome completo" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="telefone" placeholder="Telefone" required>
 
-            <textarea name="habilidades" rows="4" placeholder="Habilidades (separadas por vírgula)" required></textarea>
-            <textarea name="experiencia" rows="4" placeholder="Experiências (separadas por vírgula)" required></textarea>
-            <textarea name="educacao" rows="4" placeholder="Formações acadêmicas (separadas por vírgula)" required></textarea>
+        <textarea name="habilidades" rows="4" placeholder="Habilidades (separadas por vírgula)" required></textarea>
+        <textarea name="experiencia" rows="4" placeholder="Experiências (separadas por vírgula)" required></textarea>
+        <textarea name="educacao" rows="4" placeholder="Formações acadêmicas (separadas por vírgula)" required></textarea>
 
-            <button type="submit">Gerar Currículo</button>
-        </form>
-    </div>
+        <button type="submit">Gerar Currículo</button>
+    </form>
 </body>
 </html>
