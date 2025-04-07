@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerador de Currículos</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/942/942748.png" type="image/png">
     <style>
+        :root {
+            color-scheme: light dark;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 40px auto;
             max-width: 600px;
             padding: 0 15px;
-            background-color: white;
-            color: black;
+            transition: background-color 0.3s, color 0.3s;
         }
         input, textarea {
             width: 100%;
@@ -19,48 +22,85 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            box-sizing: border-box;
         }
         button {
             padding: 10px 20px;
             background-color: #2e86de;
             color: white;
             border: none;
-            cursor: pointer;
             border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #1e70c1;
         }
         h1 {
             text-align: center;
         }
-
-        /* 🌘 Modo escuro automático */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #121212;
-                color: #ffffff;
-            }
-            input, textarea {
-                background-color: #1e1e1e;
-                color: #ffffff;
-                border: 1px solid #444;
-            }
-            button {
-                background-color: #4a90e2;
-            }
+        #topo {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 999;
+        }
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9em;
+            opacity: 0.7;
         }
     </style>
 </head>
 <body>
     <h1>Gerador de Currículos</h1>
-    <form action="/gerar" method="post">
+    <form id="formulario" action="/gerar" method="post" onsubmit="mostrarLoading()">
         <input type="text" name="nome" placeholder="Nome completo" required>
-        <input type="email" name="email" placeholder="Email" required inputmode="email">
-        <input type="tel" name="telefone" placeholder="Telefone" required inputmode="tel">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="telefone" placeholder="Telefone" required>
 
-        <textarea name="habilidades" rows="4" placeholder="Habilidades (separadas por vírgula)" required></textarea>
-        <textarea name="experiencia" rows="4" placeholder="Experiências (separadas por vírgula)" required></textarea>
-        <textarea name="educacao" rows="4" placeholder="Formações acadêmicas (separadas por vírgula)" required></textarea>
+        <textarea name="habilidades" rows="4" placeholder="Habilidades (Ex: Python, Excel, Trabalho em equipe)" required></textarea>
+        <textarea name="experiencia" rows="4" placeholder="Experiências (Ex: Estágio na empresa X, Atendente na loja Y)" required></textarea>
+        <textarea name="educacao" rows="4" placeholder="Formações acadêmicas (Ex: Ensino Médio completo, Graduação em Administração)" required></textarea>
 
-        <button type="submit">Gerar Currículo</button>
+        <button type="submit" id="btn">Gerar Currículo</button>
+        <p id="mensagem" style="text-align:center; display:none;">Gerando currículo... ⏳</p>
     </form>
+
+    <button onclick="scrollToTop()" id="topo">↑</button>
+
+    <footer>
+        © 2025 - Gerador de Currículos por Rickzin
+    </footer>
+
+    <script>
+        function mostrarLoading() {
+            document.getElementById('btn').style.display = 'none';
+            document.getElementById('mensagem').style.display = 'block';
+        }
+
+        window.onscroll = function () {
+            const topoBtn = document.getElementById("topo");
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                topoBtn.style.display = "block";
+            } else {
+                topoBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
 </body>
 </html>
