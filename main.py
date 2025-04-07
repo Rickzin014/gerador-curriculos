@@ -25,14 +25,14 @@ def gerar_curriculo(nome, email, telefone, habilidades, experiencia, educacao):
     pdf.ln(5)
 
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Experiência Profissional:", ln=True)
+    pdf.cell(0, 10, "Experiencia Profissional:", ln=True)
     pdf.set_font("Arial", "", 12)
     for exp in experiencia:
         pdf.cell(0, 8, f"- {exp.strip()}", ln=True)
     pdf.ln(5)
 
     pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Formação Acadêmica:", ln=True)
+    pdf.cell(0, 10, "Formacao Academica:", ln=True)
     pdf.set_font("Arial", "", 12)
     for edu in educacao:
         pdf.cell(0, 8, f"- {edu.strip()}", ln=True)
@@ -55,7 +55,9 @@ def gerar():
     educacao = request.form['educacao'].split(',')
 
     pdf_path = gerar_curriculo(nome, email, telefone, habilidades, experiencia, educacao)
+
     return send_file(pdf_path, as_attachment=True)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# Remova esse bloco abaixo do Render:
+# if __name__ == '__main__':
+#     app.run(debug=True)
