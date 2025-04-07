@@ -2,38 +2,50 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerador de Currículos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Currículos</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 40px auto;
             max-width: 600px;
-            padding: 0 20px;
+            padding: 0 15px;
+            background-color: white;
+            color: black;
         }
-
         input, textarea {
             width: 100%;
             margin-bottom: 15px;
             padding: 10px;
-            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-
         button {
             padding: 10px 20px;
             background-color: #2e86de;
             color: white;
             border: none;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            border-radius: 5px;
         }
-
-        button:active {
-            transform: scale(0.97);
-        }
-
         h1 {
             text-align: center;
+        }
+
+        /* 🌘 Modo escuro automático */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            input, textarea {
+                background-color: #1e1e1e;
+                color: #ffffff;
+                border: 1px solid #444;
+            }
+            button {
+                background-color: #4a90e2;
+            }
         }
     </style>
 </head>
@@ -41,8 +53,8 @@
     <h1>Gerador de Currículos</h1>
     <form action="/gerar" method="post">
         <input type="text" name="nome" placeholder="Nome completo" required>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="text" name="telefone" placeholder="Telefone" required>
+        <input type="email" name="email" placeholder="Email" required inputmode="email">
+        <input type="tel" name="telefone" placeholder="Telefone" required inputmode="tel">
 
         <textarea name="habilidades" rows="4" placeholder="Habilidades (separadas por vírgula)" required></textarea>
         <textarea name="experiencia" rows="4" placeholder="Experiências (separadas por vírgula)" required></textarea>
@@ -50,13 +62,5 @@
 
         <button type="submit">Gerar Currículo</button>
     </form>
-
-    <script>
-        document.querySelector("form").addEventListener("submit", function () {
-            const btn = document.querySelector("button");
-            btn.disabled = true;
-            btn.innerText = "Gerando currículo...";
-        });
-    </script>
 </body>
 </html>
