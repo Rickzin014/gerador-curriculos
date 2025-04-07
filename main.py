@@ -8,36 +8,47 @@ def gerar_curriculo(nome, email, telefone, habilidades, experiencia, educacao):
     pdf = FPDF()
     pdf.set_auto_page_break(auto=True, margin=15)
     pdf.add_page()
-    pdf.set_font("Arial", "B", 16)
-    pdf.cell(200, 10, "Curriculo Profissional", ln=True, align='C')
+
+    # Cores e fontes
+    azul = (30, 144, 255)
+    preto = (0, 0, 0)
+
+    # Cabeçalho
+    pdf.set_font("Arial", "B", 20)
+    pdf.set_text_color(*azul)
+    pdf.cell(0, 10, nome, ln=True, align='C')
+
+    pdf.set_font("Arial", "", 14)
+    pdf.set_text_color(*preto)
+    pdf.cell(0, 10, "Currículo Profissional", ln=True, align='C')
+    pdf.ln(5)
+
+    # Contato
+    pdf.set_font("Arial", "", 12)
+    pdf.cell(0, 10, f"📧 {email}   📱 {telefone}", ln=True, align='C')
     pdf.ln(10)
-    
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, f"Nome: {nome}", ln=True)
-    pdf.cell(0, 10, f"Email: {email}", ln=True)
-    pdf.cell(0, 10, f"Telefone: {telefone}", ln=True)
+
+    def add_secao(titulo, lista):
+        pdf.set_text_color(*azul)
+        pdf.set_font("Arial", "B", 14)
+        pdf.cell(0, 10, f"🔹 {titulo}", ln=True)
+        pdf.set_text_color(*preto)
+        pdf.set_font("Arial", "", 12)
+        for item in lista:
+            pdf.multi_cell(0, 8, f"- {item.strip()}")
+        pdf.ln(5)
+
+    add_secao("Habilidades", habilidades)
+    add_secao("Experiência Profissional", experiencia)
+    add_secao("Formação Acadêmica", educacao)
+
+    # Linha final
+    pdf.set_draw_color(*azul)
+    pdf.set_line_width(0.5)
+    pdf.line(10, pdf.get_y(), 200, pdf.get_y())
     pdf.ln(5)
-    
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Habilidades:", ln=True)
-    pdf.set_font("Arial", "", 12)
-    for habilidade in habilidades:
-        pdf.cell(0, 8, f"- {habilidade}", ln=True)
-    pdf.ln(5)
-    
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Experiencia Profissional:", ln=True)
-    pdf.set_font("Arial", "", 12)
-    for exp in experiencia:
-        pdf.cell(0, 8, f"- {exp}", ln=True)
-    pdf.ln(5)
-    
-    pdf.set_font("Arial", "B", 12)
-    pdf.cell(0, 10, "Formacao Academica:", ln=True)
-    pdf.set_font("Arial", "", 12)
-    for edu in educacao:
-        pdf.cell(0, 8, f"- {edu}", ln=True)
-    
+
+    # Salvar PDF
     pdf_path = "curriculo.pdf"
     pdf.output(pdf_path)
     return pdf_path
@@ -54,9 +65,8 @@ def gerar():
     habilidades = request.form['habilidades'].split(',')
     experiencia = request.form['experiencia'].split(',')
     educacao = request.form['educacao'].split(',')
-    
+
     pdf_path = gerar_curriculo(nome, email, telefone, habilidades, experiencia, educacao)
-    
     return send_file(pdf_path, as_attachment=True)
 
 if __name__ == '__main__':
