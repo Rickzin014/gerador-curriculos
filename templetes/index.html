@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gerador de Currículo</title>
+</head>
+<body>
+    <h1>Gerador de Currículo</h1>
+    <form action="/gerar" method="post">
+        <label>Nome: <input type="text" name="nome" required></label><br>
+        <label>Email: <input type="email" name="email" required></label><br>
+        <label>Telefone: <input type="text" name="telefone" required></label><br>
+        <label>Habilidades (separadas por vírgula):<br>
+            <textarea name="habilidades" rows="3" cols="40"></textarea>
+        </label><br>
+        <label>Experiência Profissional (separada por vírgula):<br>
+            <textarea name="experiencia" rows="3" cols="40"></textarea>
+        </label><br>
+        <label>Educação (separada por vírgula):<br>
+            <textarea name="educacao" rows="3" cols="40"></textarea>
+        </label><br><br>
+        <button type="submit">Gerar Currículo</button>
+    </form>
+</body>
+</html>
